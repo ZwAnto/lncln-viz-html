@@ -70,7 +70,5 @@ overflow: hidden;
     transition: width 0.5s ease;
 }
 .sidebar-item:hover:before {
-   
     width: 100%;
-   
 }

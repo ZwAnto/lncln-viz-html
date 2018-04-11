@@ -31,3 +31,19 @@
     display:table-cell;
     vertical-align: middle;
 }
+
+.box-logo{
+    color:#e6e6e6;
+    position: absolute;
+    right: 0.5em;
+    padding-top: 1em;
+}
+.box-logo .wrapper{
+    float: right;
+    width: 60%;
+    overflow: hidden;
+}
+.box-logo svg{
+    overflow: hidden !important;
+    font-size: 13em;
+}
