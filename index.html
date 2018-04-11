@@ -34,7 +34,7 @@
     </head>
     <body>
         <div id='sidebar-pane'>
-            <div class='sidebar-item active'>
+            <div class='sidebar-item' data-value='paris'>
                 <div class='icon'>
                     <div class='wrapper'><i class="fas fa-university"></i></div>
                 </div>
@@ -62,8 +62,23 @@
         <div id='main-pane' class='container-fluid'>
         </div>
         <script>
-            
-            $('#main-pane').load('container_tab_paris.html');
+
+            $('.sidebar-item').click(function () {
+                container_load($(this));
+            });
+
+            container_load = function (e) {
+                var focus = $(e).attr('data-value');
+
+                if ($(e).hasClass('active') === false) {
+
+                    $('.sidebar-item.active').removeClass('active');
+                    $(e).addClass('active');
+
+                    $('#main-pane').load('container_tab_' + focus + '.html');
+                }
+            };
+
         </script>
     </body>
 </html>
