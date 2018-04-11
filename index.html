@@ -80,6 +80,24 @@
                 }
             };
 
+
+            $.getJSON("data/tonnage_paris.json", function (json) {
+                var tonnage_paris = JSON.parse(json);
+
+                tonnage_paris_date = [];
+                tonnage_paris_verre = [];
+                tonnage_paris_vert = [];
+                tonnage_paris_jaune = [];
+
+                for (i = 0; i < tonnage_paris.length; i++) {
+                    tonnage_paris_date.push(tonnage_paris[i]['date']);
+                    tonnage_paris_vert.push(tonnage_paris[i]['tonnageverts']);
+                    tonnage_paris_verre.push(tonnage_paris[i]['tonnageverre']);
+                    tonnage_paris_jaune.push(tonnage_paris[i]['tonnagejaunes']);
+                }
+                ;
+            });
+
         </script>
     </body>
 </html>

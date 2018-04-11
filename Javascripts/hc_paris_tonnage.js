@@ -1,10 +1,10 @@
 // Build the chart
-Highcharts.chart('hc_kpi_mob', {
+Highcharts.chart('hc_paris_tonnage', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'column'
+        type: 'line'
     },
     title: {
         text: '',
@@ -21,7 +21,7 @@ Highcharts.chart('hc_kpi_mob', {
         enabled: false
     },
     plotOptions: {
-        column: {
+        line: {
             allowPointSelect: false,
             cursor: 'pointer',
 
@@ -35,11 +35,11 @@ Highcharts.chart('hc_kpi_mob', {
                     fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
                 }
             },
-            showInLegend: false
+            showInLegend: true
         }
     },
     xAxis: {
-        type: 'category',
+        categories : ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
         tickWidth: 0,
         lineWidth: 0
     },
@@ -47,24 +47,16 @@ Highcharts.chart('hc_kpi_mob', {
         visible: false
     },
     series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                    name: 'Poubelle <br>de rue',
-                    y: 22147,
+                    name: 'Poubelles verres',
+                    data: tonnage_paris_verre,
                     color: '#cfe0c3'
                 }, {
-                    name: 'Poubelle <br>sur piquet',
-                    y: 2036,
+                    name: 'Poubelles vertes',
+                    data: tonnage_paris_vert,
                     color: '#9ec1a3'
                 }, {
-                    name: 'Colonne<br>de verre',
-                    y: 962,
+                    name: 'Poubelle jaunes',
+                    data: tonnage_paris_jaune,
                     color: '#70a9a1'
-                }, {
-                    name: 'Borne<br>de proprete',
-                    y: 22,
-                    color: '#40798c'
-                }]
         }]
 });
