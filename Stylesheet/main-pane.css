@@ -1,0 +1,10 @@
+
+#main-pane, #sidebar-pane{
+    position:absolute;
+}
+
+#main-pane{
+    padding-left: calc(3em + 15px);
+    
+    height:100%;
+}

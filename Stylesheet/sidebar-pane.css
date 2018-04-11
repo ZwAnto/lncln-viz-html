@@ -1,6 +1,9 @@
 
 #sidebar-pane {
 
+    z-index: 1;
+    position: fixed;
+
     width: 3em;
     height: 100vh;
 
