@@ -1,3 +1,9 @@
+<?php
+if ($_SERVER['HTTPS'] != 'on' ) {
+    header("Location: https://zwanto.org/lincoln/");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
