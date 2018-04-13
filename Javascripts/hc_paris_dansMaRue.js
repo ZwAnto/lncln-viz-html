@@ -32,5 +32,10 @@ Highcharts.chart('hc_paris_dansMaRue', {
             format: '{value:%Y-%m-%d}'
         }
     },
+    yAxis: {
+        title: {
+            text: null
+        }  
+    },
     series: dansMaRue_paris
 });
