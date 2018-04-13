@@ -1,7 +1,7 @@
 dataImport = function () {
-    setTimeout(function () {
+
         $('#loading > div > div:nth-of-type(2)').css('height', '5em');
-        setTimeout(function () {
+
             $.getJSON("Data/tonnage_paris.json", function (json) {
                 var tonnage_paris = JSON.parse(json);
 
@@ -19,7 +19,7 @@ dataImport = function () {
                 ;
 
                 $('#loading > div > div:nth-of-type(2)').css('height', '3em');
-                setTimeout(function () {
+         
                     $.getJSON("Data/paris.json", function (json) {
                         paris = JSON.parse(json)[0];
                         paris.p13_pop_m = paris.p13_pop / 1000000;
@@ -31,7 +31,7 @@ dataImport = function () {
 
                         $('#loading > div > div:nth-of-type(2)').css('height', '0em');
 
-                        setTimeout(function () {
+                 
                             
                             
                              $.getJSON("Data/dansMaRue_paris.json", function (json) {
@@ -42,12 +42,12 @@ dataImport = function () {
                              });
                              
                             
-                        }, 1000);
+                
 
                     });
-                }, 1000);
+    
             });
-        }, 2000);
-    }, 1000);
+   
+
 
 };

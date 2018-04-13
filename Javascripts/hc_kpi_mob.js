@@ -10,7 +10,7 @@ Highcharts.chart('hc_kpi_mob', {
         text: '',
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        enabled: false
     },
     legend: {
         itemStyle: {
@@ -23,8 +23,6 @@ Highcharts.chart('hc_kpi_mob', {
     plotOptions: {
         column: {
             allowPointSelect: false,
-            cursor: 'pointer',
-
             dataLabels: {
                 enabled: true,
                 color: '#555555',

@@ -4,13 +4,13 @@ Highcharts.chart('hc_paris_tonnage', {
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false,
-        type: 'area'
+        type: 'column'
     },
     title: {
         text: '',
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>{point.y:.0f}{point.percentage:.1f}%</b>'
     },
     legend: {
         verticalAlign: 'top',
@@ -22,30 +22,17 @@ Highcharts.chart('hc_paris_tonnage', {
         enabled: false
     },
     plotOptions: {
-         area: {
-            stacking: 'percent',
-            lineColor: '#ffffff',
-            lineWidth: 1,
-            marker: {
-                enabled: false
-               
-            }
-        },
-        line: {
-            allowPointSelect: false,
-            dataLabels: {
-                enabled: true,
+        column: {
+            stacking: 'normal',
+             dataLabels: {
+                enabled: false,
                 color: '#555555',
                 format: '{point.y:.0f}', // one decimal
                 style: {
                     fontSize: '11px',
                     fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
                 }
-            },
-            marker: {
-                enabled: false
-            },
-            showInLegend: true
+            }
         }
     },
     xAxis: {
@@ -54,7 +41,24 @@ Highcharts.chart('hc_paris_tonnage', {
         lineWidth: 0
     },
     yAxis: {
-        visible: false
+        tickWidth: 0,
+        lineWidth: 0,
+        gridLineWidth:0,
+        labels: {
+            enabled: false
+        },
+        title: {
+            text: null
+        },
+         stackLabels: {
+                enabled: true,
+                color: '#555555',
+                format: '{total:.0f}', 
+                style: {
+                    fontSize: '11px',
+                    fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
+                }
+            }
     },
     series: [{
             name: 'Verres',
