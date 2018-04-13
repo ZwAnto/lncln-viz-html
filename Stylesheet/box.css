@@ -1,11 +1,18 @@
 .box{
     color: #555555;
     background-color: white;
-    min-height: 15em;
-    height:100%;
+    
     border-radius: 0.2em;
     box-shadow: 0px 0px 1px 1px #DDDDDD;
     border: 1px solid lightgray;
+}
+.box-sm{
+    min-height: 15em;
+    height:100%;
+}
+.box-lg{
+    min-height: 30em;
+    height:100%;
 }
 .box-header{
     padding-left: 0.5em;
@@ -40,7 +47,7 @@
 }
 .box-logo .wrapper{
     float: right;
-    width: 60%;
+    width: 50%;
     overflow: hidden;
 }
 .box-logo svg{

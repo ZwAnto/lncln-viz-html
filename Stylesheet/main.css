@@ -1,10 +1,12 @@
+@import url('font.css');
 @import url('sidebar-pane.css');
 @import url('box.css');
 @import url('main-pane.css');
+@import url('loading.css');
 
 body{
     background-color: rgb(234, 234, 234);
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'lincoln', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .row > div{
@@ -16,4 +18,12 @@ hr {
     border-top: 1px solid white; 
     height: 1px; 
     margin: 0.5em 0.5em; 
+}
+
+#logoLincoln {
+    position: fixed;
+    bottom: 1em;
+    width: 8em;
+    margin-left: calc(50% - 5.5em);
+    left: 3em;
 }

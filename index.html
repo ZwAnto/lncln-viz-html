@@ -6,6 +6,13 @@
         <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
         <meta name="theme-color" content="#e71e62">       
 
+        <style type='text/css'>
+            @font-face {
+  font-family: "lincoln";
+  src: url("../Font/Gotham-Book.woff2") format("woff2");
+}
+        </style>
+        
         <!-- Bootstrap CSS -->
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
 
@@ -31,82 +38,23 @@
 
         <!-- Elastic Search -->
         <script defer src='https://zwanto.org/lincoln/Libs/elasticsearch-js/elasticsearch.js'></script>
+        <script src='Javascripts/import.js' ></script>
     </head>
-    <body>
-        <div id='sidebar-pane'>
-            
-            <div class='sidebar-item sidebar-brand' data-value='main'>
-                <div class='icon'>
-                    <div class='wrapper'><i class="fas fa-leaf"></i></div>
+    <body onload="dataImport();">
+        <div id="loading" style="
+             ">
+            <div>
+                <div>
+                    <i class="fas fa-trash-alt" aria-hidden="true"></i>
                 </div>
-                <div class='label'>Viz'ta poubelle</div>
-            </div>
-            <hr>
-            <div class='sidebar-item' data-value='paris'>
-                <div class='icon'>
-                    <div class='wrapper'><i class="fas fa-university"></i></div>
+                <div>
+                  <i class="fas fa-trash-alt" aria-hidden="true"></i>
                 </div>
-                <div class='label'>Paris</div>
-            </div>
-            <div class='sidebar-item'>
-                <div class='icon'>
-                    <div class='wrapper'><i class="fas fa-building"></i></div>
-                </div>
-                <div class='label'>Arrondissement</div>
-            </div>
-            <div class='sidebar-item'>
-                <div class='icon'>
-                    <div class='wrapper'><i class="fas fa-map-marker-alt"></i></div>
-                </div>
-                <div class='label'>Detail</div>
-            </div>
-            <div class='sidebar-item'>
-                <div class='icon'>
-                    <div class='wrapper'><i class="fas fa-file-alt"></i></div>
-                </div>
-                <div class='label'>Doc</div>
             </div>
         </div>
-        <div id='main-pane' class='container-fluid'>
-        </div>
-        <script>
-
-            $('.sidebar-item').click(function () {
-                container_load($(this));
-            });
-
-            container_load = function (e) {
-                var focus = $(e).attr('data-value');
-
-                if ($(e).hasClass('active') === false) {
-
-                    $('.sidebar-item.active').removeClass('active');
-                    $(e).addClass('active');
-
-                    $('#main-pane').load('container_tab_' + focus + '.html');
-                }
-            };
-
-
-            $.getJSON("data/tonnage_paris.json", function (json) {
-                var tonnage_paris = JSON.parse(json);
-
-                tonnage_paris_date = [];
-                tonnage_paris_verre = [];
-                tonnage_paris_vert = [];
-                tonnage_paris_jaune = [];
-
-                for (i = 0; i < tonnage_paris.length; i++) {
-                    tonnage_paris_date.push(tonnage_paris[i]['date']);
-                    tonnage_paris_vert.push(tonnage_paris[i]['tonnageverts']);
-                    tonnage_paris_verre.push(tonnage_paris[i]['tonnageverre']);
-                    tonnage_paris_jaune.push(tonnage_paris[i]['tonnagejaunes']);
-                }
-                ;
-            });
-
-        </script>
+        
     </body>
+
 </html>
 
 

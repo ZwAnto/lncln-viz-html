@@ -51,19 +51,19 @@ Highcharts.chart('hc_kpi_mob', {
             colorByPoint: true,
             data: [{
                     name: 'Poubelle <br>de rue',
-                    y: 22147,
+                    y: paris.POU,
                     color: '#cfe0c3'
                 }, {
                     name: 'Poubelle <br>sur piquet',
-                    y: 2036,
+                    y: paris.POUP,
                     color: '#9ec1a3'
                 }, {
                     name: 'Colonne<br>de verre',
-                    y: 962,
+                    y: paris.VER,
                     color: '#70a9a1'
                 }, {
                     name: 'Borne<br>de proprete',
-                    y: 22,
+                    y: paris.PRE,
                     color: '#40798c'
                 }]
         }]

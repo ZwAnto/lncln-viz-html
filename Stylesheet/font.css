@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "lincoln";
+    src: url("../Font/Gotham-Book.woff2") format("woff2");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "lincoln";
+    src: url("../Font/Gotham-Medium.woff2") format("woff2");
+    font-weight: bold;
+
+}
