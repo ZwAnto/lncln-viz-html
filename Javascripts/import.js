@@ -32,7 +32,16 @@ dataImport = function () {
                         $('#loading > div > div:nth-of-type(2)').css('height', '0em');
 
                         setTimeout(function () {
-                            $('body').load('index_body.html');
+                            
+                            
+                             $.getJSON("Data/dansMaRue_paris.json", function (json) {
+                                 dansMaRue_paris = json;
+                                 
+                                 $('body').load('index_body.html');
+                                 
+                             });
+                             
+                            
                         }, 1000);
 
                     });
