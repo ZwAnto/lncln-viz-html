@@ -35,6 +35,9 @@ if ($_SERVER['HTTPS'] != 'on' ) {
 
         <!-- Highcharts -->
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
+        
+        <!-- Highmaps -->
+        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>   
