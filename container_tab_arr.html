@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class='box box-lg'> 
+
+            <div id='map_arr_select_container'>
+                <select id="map_arr_select" class="form-control-sm">
+                    <optgroup label="Général">
+                        <option value='p13_pop'>Population</option>
+                        <option value='area'>Superficie</option>
+                    </optgroup> 
+                    <optgroup label="Mobilier">
+                        <option value='mobilier'>Total</option>
+                        <option value='mobilier_hab'>Par habitant</option>
+                        <option value='POU'>Poubelles de rue</option>
+                        <option value='POUP'>Poubelles sur piquet</option>
+                        <option value='PRE'>Bornes de propreté</option>
+                        <option value='VER'>Colonne de verre</option>
+                    </optgroup>
+                    <optgroup label="Tonnage">
+                        <option value='tonnage'>Total</option>
+                        <option value='tonnage_hab'>Par habitant</option>
+                        <option value='tonnageVerts'>Poubelles vertes</option>
+                        <option value='tonnageJaunes'>Poubelles jaunes</option>
+                        <option value='tonnageVerre'>Poubelles verre</option>
+                    </optgroup>
+                    <optgroup label="Tri mobile">
+                        <option value='triMobileN'>Passages mensuel</option>
+                        <option value='triMobileNGeo'>Points de collecte</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div id='map_arr'></div>
+        </div>
+    </div>
+    <div class="col-sm-6" style='padding:0'>
+        <div class='row' style='margin:0'>
+            <div class="col-sm-6">
+                <div class='box box-sm'>
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class='box box-sm'> 
+
+                </div>
+            </div>
+
+        </div>
+        <div class='row' style='margin:0'>
+            <div class="col-sm-6">
+                <div class='box box-sm'>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class='box box-lg'> 
+            <div class='box-header'>Tonnage des poubelles (global)</div>
+            <div class='box-content '>
+                
+                <div id="arr_tonnage_check_container" class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="arr_tonnage_check">
+                    <label class="form-check-label" for="arr_tonnage_check">
+                        Base 100 au premier Janvier 
+                   </label>
+                </div>
+                <div id='hc_arr_tonnage' style='position:absolute;width:100%;height:100%;'></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src='https://zwanto.org/lincoln/Javascripts/hc_arr_tonnage.js'></script>
+<script>
+
+    function getColor(d) {
+        return d > 0.9 ? colors[9] :
+                d > 0.8 ? colors[8] :
+                d > 0.7 ? colors[7] :
+                d > 0.6 ? colors[6] :
+                d > 0.5 ? colors[5] :
+                d > 0.4 ? colors[4] :
+                d > 0.3 ? colors[3] :
+                d > 0.2 ? colors[2] :
+                d > 0.1 ? colors[1] :
+                colors[0];
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+
+        layer.setStyle({
+            weight: 2,
+            color: '#42576c',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+
+        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+            layer.bringToFront();
+        }
+        info.update(layer.feature.properties);
+    }
+    function resetHighlight(e) {
+        map_arr_arr_layer.resetStyle(e.target);
+        info.update();
+    }
+    function zoomToFeature(e) {
+        map_arr.fitBounds(e.target.getBounds());
+    }
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: zoomToFeature
+        });
+    }
+    
+    colors = genColorGradient('#70A9A1', 10);
+
+    // Leaflet map initialisation
+    window.map_arr = L.map('map_arr').setView([40.747133, -73.927887], 10);
+
+    //CartoDB layer names: light_all / dark_all / light_nonames / dark_nonames
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map_arr);
+
+    // Moving zoom control
+    map_arr.zoomControl.setPosition('bottomleft');
+    $('.leaflet-control-attribution').remove();
+
+    function style(feature) {
+        return {
+            fillColor: getColor(feature.properties.index_p13_pop_m),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '',
+            fillOpacity: 0.7
+        };
+    }
+
+    map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: style}).addTo(map_arr);
+
+    map_arr.fitBounds(map_arr_arr_layer.getBounds());
+    map_arr.setMaxBounds(map_arr_arr_layer.getBounds());
+    map_arr.setMinZoom(11);
+
+
+    var info = L.control();
+    info.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+        this.update();
+        return this._div;
+    };
+// method that we will use to update the control based on feature properties passed
+    info.update = function (props) {
+        this._div.innerHTML = '<h4>US Population Density</h4>' + (props ?
+                '<b>' + props.p13_pop + '</b><br />' + props.area + ' people / mi<sup>2</sup>'
+                : 'Hover over a state');
+    };
+    info.addTo(map_arr);
+
+
+    $('#map_arr_select').change(function () {
+        var varName = 'index_' + $('#map_arr_select').val();
+
+        function style(feature) {
+            return {
+                fillColor: getColor(feature.properties[varName]),
+                weight: 2,
+                opacity: 1,
+                color: 'white',
+                dashArray: '',
+                fillOpacity: 0.7
+            };
+        }
+
+        map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: style}).addTo(map_arr);
+    });
+</script>

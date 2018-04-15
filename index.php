@@ -45,6 +45,7 @@ if ($_SERVER['HTTPS'] != 'on' ) {
         <!-- Elastic Search -->
         <script defer src='https://zwanto.org/lincoln/Libs/elasticsearch-js/elasticsearch.js'></script>
         <script src='Javascripts/import.js' ></script>
+        <script src='Javascripts/main.js' ></script>
     </head>
     <body onload="dataImport();">
         <div id="loading" style="
