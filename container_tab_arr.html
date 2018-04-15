@@ -5,52 +5,45 @@
             <div id='map_arr_select_container'>
                 <select id="map_arr_select" class="form-control-sm">
                     <optgroup label="Général">
-                        <option value='p13_pop'>Population</option>
-                        <option value='area'>Superficie</option>
+                        <option value='p13_pop' data-label="Population" data-unit="">Population</option>
+                        <option value='area' data-label="Superficie" data-unit="Km2">Superficie</option>
                     </optgroup> 
                     <optgroup label="Mobilier">
-                        <option value='mobilier'>Total</option>
-                        <option value='mobilier_hab'>Par habitant</option>
-                        <option value='POU'>Poubelles de rue</option>
-                        <option value='POUP'>Poubelles sur piquet</option>
-                        <option value='PRE'>Bornes de propreté</option>
-                        <option value='VER'>Colonne de verre</option>
+                        <option value='mobilier' data-label="Mobilier de propreté" data-unit="">Total</option>
+                        <option value='mobilier_hab' data-label="Mobilier de propreté/Hab." data-unit="">Par habitant</option>
+                        <option value='POU' data-label="Poubelles de rue" data-unit="">Poubelles de rue</option>
+                        <option value='POUP' data-label="Poubelles sur piquet" data-unit="">Poubelles sur piquet</option>
+                        <option value='PRE' data-label="Bornes de propreté" data-unit="">Bornes de propreté</option>
+                        <option value='VER' data-label="Colonne de verre" data-unit="">Colonne de verre</option>
                     </optgroup>
                     <optgroup label="Tonnage">
-                        <option value='tonnage'>Total</option>
-                        <option value='tonnage_hab'>Par habitant</option>
-                        <option value='tonnageVerts'>Poubelles vertes</option>
-                        <option value='tonnageJaunes'>Poubelles jaunes</option>
-                        <option value='tonnageVerre'>Poubelles verre</option>
+                        <option value='tonnage' data-label="Tonnage" data-unit="Kg">Total</option>
+                        <option value='tonnage_hab' data-label="Tonnage/Hab." data-unit="">Par habitant</option>
+                        <option value='tonnageVerts' data-label="Poubelle vertes" data-unit="Kg">Poubelles vertes</option>
+                        <option value='tonnageJaunes' data-label="Poubelle jaunes" data-unit="Kg">Poubelles jaunes</option>
+                        <option value='tonnageVerre' data-label="Poubelle verre" data-unit="Kg">Poubelles verre</option>
                     </optgroup>
                     <optgroup label="Tri mobile">
-                        <option value='triMobileN'>Passages mensuel</option>
-                        <option value='triMobileNGeo'>Points de collecte</option>
+                        <option value='triMobileN' data-label="" data-unit="">Passages mensuel</option>
+                        <option value='triMobileNGeo' data-label="" data-unit="">Points de collecte</option>
                     </optgroup>
                 </select>
             </div>
             <div id='map_arr'></div>
         </div>
     </div>
-    <div class="col-sm-6" style='padding:0'>
-        <div class='row' style='margin:0'>
-            <div class="col-sm-6">
-                <div class='box box-sm'>
+    <div class="col-sm-6">
+        <div class='box box-lg'> 
+            <div class='box-header'>Tonnage des poubelles (global)</div>
+            <div class='box-content '>
 
+                <div id="arr_tonnage_check_container" class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="arr_tonnage_check">
+                    <label class="form-check-label" for="arr_tonnage_check">
+                        Base 100 au premier Janvier 
+                    </label>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class='box box-sm'> 
-
-                </div>
-            </div>
-
-        </div>
-        <div class='row' style='margin:0'>
-            <div class="col-sm-6">
-                <div class='box box-sm'>
-
-                </div>
+                <div id='hc_arr_tonnage' style='position:absolute;width:100%;height:100%;'></div>
             </div>
         </div>
 
@@ -60,21 +53,24 @@
 <div class="row">
     <div class="col-sm-6">
         <div class='box box-lg'> 
-            <div class='box-header'>Tonnage des poubelles (global)</div>
+            <div class='box-header'>Comparaison population / poubelles / tonnage</div>
             <div class='box-content '>
-                
-                <div id="arr_tonnage_check_container" class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="arr_tonnage_check">
-                    <label class="form-check-label" for="arr_tonnage_check">
-                        Base 100 au premier Janvier 
-                   </label>
-                </div>
-                <div id='hc_arr_tonnage' style='position:absolute;width:100%;height:100%;'></div>
+                <div id='hc_arr_scatter' style='position:absolute;width:100%;height:100%;'></div>
             </div>
         </div>
-
+    </div>
+     <div class="col-sm-6">
+        <div class='box box-lg'> 
+            <div class='box-header'>Tonnage par habitant (en kg)</div>
+            <div class='box-content '>
+                <div id='hc_arr_tonnageHab' style='position:absolute;width:100%;height:100%;'></div>
+            </div>
+        </div>
     </div>
 </div>
 <script src='https://zwanto.org/lincoln/Javascripts/hc_arr_tonnage.js'></script>
 <script src='https://zwanto.org/lincoln/Javascripts/leaflet_arr.js'></script>
+<script src='https://zwanto.org/lincoln/Javascripts/hc_arr_scatter.js'></script>
+<script src='https://zwanto.org/lincoln/Javascripts/hc_arr_tonnageHab.js'></script>
+
 

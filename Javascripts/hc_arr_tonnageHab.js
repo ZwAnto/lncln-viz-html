@@ -1,5 +1,5 @@
 // Build the chart
-Highcharts.chart('hc_kpi_mob', {
+Highcharts.chart('hc_arr_tonnageHab', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -7,7 +7,7 @@ Highcharts.chart('hc_kpi_mob', {
         type: 'column'
     },
     title: {
-        text: null
+        text: '',
     },
     tooltip: {
         enabled: false
@@ -33,7 +33,8 @@ Highcharts.chart('hc_kpi_mob', {
                     fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif"
                 }
             },
-            showInLegend: false
+            showInLegend: false,
+            colorByPoint: true
         }
     },
     xAxis: {
@@ -44,25 +45,6 @@ Highcharts.chart('hc_kpi_mob', {
     yAxis: {
         visible: false
     },
-    series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                    name: 'Poubelle <br>de rue',
-                    y: paris.POU,
-                    color: '#cfe0c3'
-                }, {
-                    name: 'Poubelle <br>sur piquet',
-                    y: paris.POUP,
-                    color: '#9ec1a3'
-                }, {
-                    name: 'Colonne<br>de verre',
-                    y: paris.VER,
-                    color: '#70a9a1'
-                }, {
-                    name: 'Borne<br>de proprete',
-                    y: paris.PRE,
-                    color: '#40798c'
-                }]
-        }]
+    colors: genColorGradient(colorPal[3],20).reverse() ,
+    series: tonnageHab_arr
 });

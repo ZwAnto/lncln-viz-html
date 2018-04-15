@@ -35,10 +35,14 @@ if ($_SERVER['HTTPS'] != 'on' ) {
 
         <!-- Highcharts -->
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
-
+        <script src="https://code.highcharts.com/highcharts-more.js"></script>
+        
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>   
-
+        <link rel='stylesheet' href='https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css'>
+        <link rel='stylesheet' href='https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css'>
+        <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>   
+        
         <!-- Font Awesome -->
         <script defer src='https://zwanto.org/lincoln/Libs/fontawesome/fontawesome-all.js'></script>
 

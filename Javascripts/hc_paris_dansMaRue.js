@@ -6,7 +6,7 @@ Highcharts.chart('hc_paris_dansMaRue', {
         type: 'line'
     },
     title: {
-        text: '',
+        text: null
     },
     legend: {
         verticalAlign: 'top',

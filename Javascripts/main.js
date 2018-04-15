@@ -24,3 +24,20 @@ function genColorGradient(hexColor, n) {
 
         return color;
     }
+    
+colorPal= ['#1F363D','#40798C','#70A9A1','#9EC1A3','#CFE0C3'];
+
+// map function
+function getColor(d) {
+    return d > 0.9 ? colors[9] :
+            d > 0.8 ? colors[8] :
+            d > 0.7 ? colors[7] :
+            d > 0.6 ? colors[6] :
+            d > 0.5 ? colors[5] :
+            d > 0.4 ? colors[4] :
+            d > 0.3 ? colors[3] :
+            d > 0.2 ? colors[2] :
+            d > 0.1 ? colors[1] :
+            colors[0];
+}
+

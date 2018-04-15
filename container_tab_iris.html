@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class='box box-lg'> 
+            
+            <div id='map_iris_select_container'>
+                <select id="map_iris_select" class="form-control-sm">
+                    <optgroup label="Général">
+                        <option value='p13_pop'>Population</option>
+                        <option value='area'>Superficie</option>
+                    </optgroup> 
+                    <optgroup label="Mobilier">
+                        <option value='mobilier'>Total</option>
+                        <option value='mobilier_hab'>Par habitant</option>
+                        <option value='POU'>Poubelles de rue</option>
+                        <option value='POUP'>Poubelles sur piquet</option>
+                        <option value='PRE'>Bornes de propreté</option>
+                        <option value='VER'>Colonne de verre</option>
+                    </optgroup>
+                    <optgroup label="Tri mobile">
+                        <option value='triMobileN'>Passages mensuel</option>
+                        <option value='triMobileNGeo'>Points de collecte</option>
+                    </optgroup>
+                </select>
+            </div>
+            
+            <div id='map_iris'></div>
+        </div>
+    </div>
+
+<div class="col-sm-6" style='padding:0'>
+    <div class='row' style='margin:0'>
+        <div class="col-sm-6">
+            <div class='box box-sm'>
+                <div class="box-logo">
+                    <div class='wrapper'>
+                        <i class="fal fa-male" aria-hidden='true'></i>
+                    </div>
+                </div>
+                <div class='box-header '>Population parisienne</div>
+                <div class='box-content middle'>
+                    <div id='dataArrPop'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class='box box-sm'> 
+                <div class="box-logo">
+                    <div class='wrapper'>
+                        <i class="fal fa-trash-alt" aria-hidden='true'></i>
+                    </div>
+                </div>
+                <div class='box-header'>Poubelles de rue</div>
+                <div class='box-content middle'>
+                    <div id='dataArrPou'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class='row' style='margin:0'>
+        <div class="col-sm-6">
+            <div class='box box-sm'>
+                <div class="box-logo">
+                    <div class='wrapper'>
+                        <i class="fal fa-truck fa-flip-horizontal" aria-hidden='true'></i>
+                    </div>
+                </div>
+                <div class='box-header'>Tri mobile</div>
+                <div class='box-content middle'>
+                    <div id='dataArrTriMobile'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</div>
+<script src='https://zwanto.org/lincoln/Javascripts/leaflet_iris.js'></script>

@@ -7,7 +7,7 @@ Highcharts.chart('hc_paris_tonnage', {
         type: 'column'
     },
     title: {
-        text: '',
+        text: null
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.y:.0f}{point.percentage:.1f}%</b>'
