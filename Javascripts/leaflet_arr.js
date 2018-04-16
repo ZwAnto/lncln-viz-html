@@ -2,7 +2,8 @@
 function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
-        mouseout: resetHighlight
+        mouseout: resetHighlight,
+        click: irisRedirect
     });
 }
 function style(feature) {
@@ -34,9 +35,15 @@ function resetHighlight(e) {
     map_arr_arr_layer.resetStyle(e.target);
     info.update();
 }
-
-// Color array
-colors = genColorGradient(colorPal[3], 10);
+function irisRedirect(e) {
+    var layer = e.target;
+    var props = layer.feature.properties;
+    
+    iris_data = props;
+    
+    $('#main-pane').load('container_tab_iris.html');
+    
+}
 
 // Map initialization
 window.map_arr = L.map('map_arr');
@@ -72,8 +79,7 @@ info.update = function (props) {
     var varName = $('#map_arr_select').val();
     var varLabel = $('#map_arr_select :selected').data("label");
     var varUnit = $('#map_arr_select :selected').data("unit");
-    console.log(props);
-
+    
     if (props) {
         $("#map_arr .info").html(props.nom_com + '<br>' + varLabel + ': ' + Math.round(props[varName],0).toLocaleString() + ' ' + varUnit);
         $("#map_arr .info").css('display','block');

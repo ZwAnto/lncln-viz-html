@@ -19,12 +19,6 @@
         </div>
         <div class='label'>Arrondissement</div>
     </div>
-        <div class='sidebar-item' data-value='iris'>
-        <div class='icon'>
-            <div class='wrapper'><i class="fas fa-building"></i></div>
-        </div>
-        <div class='label'>Iris</div>
-    </div>
     <div class='sidebar-item' data-value='detail'>
         <div class='icon'>
             <div class='wrapper'><i class="fas fa-map-marker-alt"></i></div>
@@ -50,6 +44,7 @@
 
             $('#main-pane').load('container_tab_' + focus + '.html');
         }
+        window.scrollTo(0, document.body.scrollHeight);
     };
 
     $('.sidebar-item:nth-of-type(1)').click();

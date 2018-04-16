@@ -62,12 +62,6 @@ hr {
     margin-top: -2.4em;
 }
 
-#map_arr_select_container{
-    position: absolute;
-    margin: 0.5em;
-    z-index: 1;
-}
-
 #arr_tonnage_check_container{
     position: absolute;
     z-index: 1;

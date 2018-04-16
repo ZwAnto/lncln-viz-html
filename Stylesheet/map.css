@@ -12,3 +12,21 @@
     border-radius: 0.2em;
     font-size: 1.2em;
 }
+
+#map_arr_select_container,
+#map_iris_select_container{
+    position: absolute;
+    margin: 0.5em;
+    z-index: 1;
+}
+
+
+.leaflet-div-icon {
+    border: none;
+    background: none;
+    text-align: center;
+}
+.leaflet-div-icon svg {
+    color: #42566b;
+    font-size: 40px;
+}
