@@ -91,8 +91,63 @@ info.update = function (props) {
 };
 info.addTo(map_arr);
 
+
+
+var legend = L.control({position: 'topright'});
+
+legend.onAdd = function (map) {
+
+    var varName = $('#map_arr_select').val();
+   
+    var varRange = geoPropRange(arr_geo,varName);
+    var rangeDiff = (varRange[1] - varRange[0])/10;
+    var varGrades = [];
+    for (i=0;i<10;i++){
+            varGrades.push(Math.round(varRange[0]+i*rangeDiff));
+    }
+    
+    var div = L.DomUtil.create('div', 'legend')
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < varGrades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(i/10) + '"></i> ' +
+            varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+    }
+    return div;
+};
+legend.update = function(){
+    var varName = $('#map_arr_select').val();
+   
+    var varRange = geoPropRange(arr_geo,varName);
+    var rangeDiff = (varRange[1] - varRange[0])/10;
+    var varGrades = [];
+    for (i=0;i<10;i++){
+            varGrades.push(Math.round(varRange[0]+i*rangeDiff));
+    }
+    
+    // loop through our density intervals and generate a label with a colored square for each interval
+    var html = '';
+    for (var i = 0; i < varGrades.length; i++) {
+        html +=
+            '<i style="background:' + getColor(i/10) + '"></i> ' +
+            varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+    }
+    
+    $('#map_arr .legend').html(html);
+}
+legend.addTo(map_arr);
+
+
+
+
+
+
+
 // Change color scheme on variable selection
 $('#map_arr_select').change(function () {
+    
+    legend.update();
     
     map_arr_arr_layer.removeFrom(map_arr);
         

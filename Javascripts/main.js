@@ -39,6 +39,24 @@ function getColor(d) {
             d > 0.3 ? colors[3] :
             d > 0.2 ? colors[2] :
             d > 0.1 ? colors[1] :
+            
+            // iris type color
+            d == 'A' ? colorPal[3] :
+            d == 'H' ? colorPal[2] :
+            d == 'D' ? colorPal[1] :
+            
             colors[0];
 }
 
+function geoPropRange(geoJSON,prop){
+    
+    var min = Infinity;
+    var max = -Infinity;
+    
+    for (i=0; i< geoJSON.features.length; i++){
+            min = Math.min(geoJSON.features[i].properties[prop],min);
+            max = Math.max(geoJSON.features[i].properties[prop],max);
+    }
+    
+    return([min,max]);
+}

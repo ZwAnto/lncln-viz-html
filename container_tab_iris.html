@@ -16,11 +16,18 @@
         <div class='box box-lg'> 
 
             <div id='map_iris_select_container'>
-                <select id="map_iris_select" class="form-control-sm">
+                <i class="fas fa-hexagon"></i>
+                <select id="map_iris_selectArea" class="form-control-sm">
                     <optgroup label="Général">
                         <option value='p13_pop' data-label="Population" data-unit="">Population</option>
                         <option value='typ_iris' data-label="Type" data-unit="">Type d'iris</option>
                     </optgroup> 
+                </select>
+            </div>
+            <div id='map_iris_select_container' style="margin-top: 3em;">
+                <i class="fas fa-map-marker"></i>
+                <select id="map_iris_selectMarker" class="form-control-sm">
+                    <option disabled selected value style='display:none'></option>
                     <optgroup label="Mobilier">
                         <option value='POU' data-label="Poubelles de rue" data-unit="">Poubelles de rue</option>
                         <option value='POUP' data-label="Poubelles sur piquet" data-unit="">Poubelles sur piquet</option>
@@ -32,7 +39,6 @@
                     </optgroup>
                 </select>
             </div>
-
             <div id='map_iris'></div>
         </div>
     </div>
@@ -94,8 +100,8 @@
 </div>
 <script src='https://zwanto.org/lincoln/Javascripts/leaflet_iris.js'></script>
 <script>
-$('#dataIrisPop').html('<h2>' + iris_data.p13_pop_m.toFixed(2)*1000 + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + '</h2>Kg de déchets / Hab. / An');
-$('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m</b>');
-$('#dataIrisTriMobile').html('<h2>' + iris_data.triMobileN + '</h2>collectes mensuelles<br><br><h2>' + iris_data.triMobileNGeo + '</h2>points de collecte');
+                 $('#dataIrisPop').html('<h2>' + iris_data.p13_pop_m.toFixed(2) * 1000 + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + '</h2>Kg de déchets / Hab. / An');
+                 $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m</b>');
+                 $('#dataIrisTriMobile').html('<h2>' + iris_data.triMobileN + '</h2>collectes mensuelles<br><br><h2>' + iris_data.triMobileNGeo + '</h2>points de collecte');
 
 </script>
