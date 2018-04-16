@@ -3,8 +3,8 @@ dataImport = function () {
         tonnage_paris = json;
         $.getJSON("Data/paris.json", function (json) {
             paris = json;
-            $.getJSON("Data/dansMaRue_paris_type.json", function (json) {
-                dansMaRue_paris_type = json;
+            $.getJSON("Data/dansMaRue_paris.json", function (json) {
+                dansMarue_paris = json;
                 $('#loading > div > div:nth-of-type(2)').css('height', '5.5em');
                 $.getJSON("Data/arr.geojson", function (json) {
                     arr_geo = json;

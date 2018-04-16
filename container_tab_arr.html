@@ -6,7 +6,7 @@
                 <i class="fas fa-hexagon"></i>
                 <select id="map_arr_select" class="form-control-sm">
                     <optgroup label="Général">
-                        <option value='p13_pop' data-label="Population" data-unit="">Population</option>
+                        <option value='p13_pop' data-label="Population" data-unit="Hab.">Population</option>
                         <option value='area' data-label="Superficie" data-unit="Km2">Superficie</option>
                     </optgroup> 
                     <optgroup label="Mobilier">
@@ -19,14 +19,19 @@
                     </optgroup>
                     <optgroup label="Tonnage">
                         <option value='tonnage' data-label="Tonnage" data-unit="Kg">Total</option>
-                        <option value='tonnage_hab' data-label="Tonnage/Hab." data-unit="">Par habitant</option>
+                        <option value='tonnage_hab' data-label="Tonnage/Hab." data-unit="Kg/Hab.">Par habitant</option>
                         <option value='tonnageVerts' data-label="Poubelle vertes" data-unit="Kg">Poubelles vertes</option>
                         <option value='tonnageJaunes' data-label="Poubelle jaunes" data-unit="Kg">Poubelles jaunes</option>
                         <option value='tonnageVerre' data-label="Poubelle verre" data-unit="Kg">Poubelles verre</option>
                     </optgroup>
                     <optgroup label="Tri mobile">
-                        <option value='triMobileN' data-label="" data-unit="">Passages mensuel</option>
-                        <option value='triMobileNGeo' data-label="" data-unit="">Points de collecte</option>
+                        <option value='triMobileN' data-label="Passages mensuel" data-unit="">Passages mensuel</option>
+                        <option value='triMobileNGeo' data-label="Points de collecte" data-unit="">Points de collecte</option>
+                    </optgroup>
+                      <optgroup label="Dans ma rue">
+                        <option value='graffitis' data-label="Graffiti" data-unit="">Graffiti</option>
+                        <option value='proprete' data-label="Propreté" data-unit="">Propreté</option>
+                        <option value='abandonnes' data-label="Objet abandonnés" data-unit="">Objet abandonnés</option>
                     </optgroup>
                 </select>
             </div>
