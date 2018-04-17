@@ -251,7 +251,8 @@ $('#map_iris_selectMarker').change(function () {
 
         markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: customIcon});
+                var marker =  L.marker(latlng, {icon: customIcon});
+                return marker;
             },
             filter: function (feature, layer) {
                 if (feature.properties.type == $('#map_iris_selectMarker :selected').attr('value')) {
@@ -263,7 +264,11 @@ $('#map_iris_selectMarker').change(function () {
 
         markers.addLayer(L.geoJSON(triMobile_geo, {
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: customIcon});
+                var marker =  L.marker(latlng, {icon: customIcon});
+                marker.bindPopup("<b>Adresse:</b> " + feature.properties['adresse'] +
+                        "<br><b>Horaires:</b> " + feature.properties['horaires'] + 
+                        "<br><b>Jours:</b> " + feature.properties['jours.de.tenue']);
+                return marker;
             },
             filter: function (feature, layer) {
                 if (feature.properties.insee_com == iris_data.insee_com) {
