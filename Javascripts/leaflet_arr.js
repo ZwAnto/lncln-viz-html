@@ -64,8 +64,8 @@ map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: sty
 map_arr.fitBounds(map_arr_arr_layer.getBounds());
 
 // Map limitation
-map_arr.setMaxBounds(map_arr_arr_layer.getBounds());
-map_arr.setMinZoom(map_arr.getZoom());
+//map_arr.setMaxBounds(map_arr_arr_layer.getBounds());
+//map_arr.setMinZoom(map_arr.getZoom());
 
 // Info container
 var info = L.control({position: 'bottomright'});
