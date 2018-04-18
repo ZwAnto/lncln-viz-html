@@ -71,7 +71,7 @@ if ($_SERVER['HTTPS'] != 'on') {
                 </div>
                 <div style="
                      padding-top: 7em;
-                     ">Chargment...</div>
+                     ">Chargement...</div>
             </div>
 
         </div>
