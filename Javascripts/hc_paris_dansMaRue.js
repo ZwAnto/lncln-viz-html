@@ -37,5 +37,5 @@ Highcharts.chart('hc_paris_dansMaRue', {
             text: null
         }  
     },
-    series: dansMaRue_paris_type
+    series: dansMarue_paris
 });

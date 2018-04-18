@@ -38,11 +38,11 @@ function resetHighlight(e) {
 function irisRedirect(e) {
     var layer = e.target;
     var props = layer.feature.properties;
-    
+
     iris_data = props;
-    
+
     $('#main-pane').load('container_tab_iris.html');
-    
+
 }
 
 // Map initialization
@@ -64,8 +64,8 @@ map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: sty
 map_arr.fitBounds(map_arr_arr_layer.getBounds());
 
 // Map limitation
-map_arr.setMaxBounds(map_arr_arr_layer.getBounds());
-map_arr.setMinZoom(map_arr.getZoom());
+//map_arr.setMaxBounds(map_arr_arr_layer.getBounds());
+//map_arr.setMinZoom(map_arr.getZoom());
 
 // Info container
 var info = L.control({position: 'bottomright'});
@@ -75,82 +75,85 @@ info.onAdd = function (map) {
     return this._div;
 };
 info.update = function (props) {
-    
+
     var varName = $('#map_arr_select').val();
     var varLabel = $('#map_arr_select :selected').data("label");
     var varUnit = $('#map_arr_select :selected').data("unit");
-    
+
     if (props) {
-        $("#map_arr .info").html(props.nom_com + '<br>' + varLabel + ': ' + Math.round(props[varName],0).toLocaleString() + ' ' + varUnit);
-        $("#map_arr .info").css('display','block');
+        $("#map_arr .info").html(props.nom_com + '<br>' + varLabel + ': ' + Math.round(props[varName], 0).toLocaleString() + ' ' + varUnit);
+        $("#map_arr .info").css('display', 'block');
     } else {
-       $("#map_arr .info").html('');
-        $("#map_arr .info").css('display','none');
+        $("#map_arr .info").html('');
+        $("#map_arr .info").css('display', 'none');
     }
-    
+
 };
 info.addTo(map_arr);
 
 
 
 var legend = L.control({position: 'topright'});
-
 legend.onAdd = function (map) {
 
     var varName = $('#map_arr_select').val();
-   
-    var varRange = geoPropRange(arr_geo,varName);
-    var rangeDiff = (varRange[1] - varRange[0])/10;
+
+    var nSplit = 4;
+
+    var varRange = geoPropRange(arr_geo, varName);
+    var rangeDiff = (varRange[1] - varRange[0]) / nSplit;
     var varGrades = [];
-    for (i=0;i<10;i++){
-            varGrades.push(Math.round(varRange[0]+i*rangeDiff));
+    for (i = 0; i < nSplit; i++) {
+        varGrades.push(Math.round(varRange[0] + i * rangeDiff));
     }
-    
+
     var div = L.DomUtil.create('div', 'legend')
 
+    if ($('#map_arr_select :selected').data('unit') != '') {
+        div.innerHTML += $('#map_arr_select :selected').data('unit') + '<br>';
+    }
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < varGrades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor(i/10) + '"></i> ' +
-            varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+                '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
+                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
     }
     return div;
 };
-legend.update = function(){
+legend.update = function () {
     var varName = $('#map_arr_select').val();
-   
-    var varRange = geoPropRange(arr_geo,varName);
-    var rangeDiff = (varRange[1] - varRange[0])/10;
+
+    var nSplit = 4;
+
+    var varRange = geoPropRange(arr_geo, varName);
+    var rangeDiff = (varRange[1] - varRange[0]) / nSplit;
     var varGrades = [];
-    for (i=0;i<10;i++){
-            varGrades.push(Math.round(varRange[0]+i*rangeDiff));
+    for (i = 0; i < nSplit; i++) {
+        varGrades.push(Math.round(varRange[0] + i * rangeDiff));
     }
-    
+
     // loop through our density intervals and generate a label with a colored square for each interval
     var html = '';
+    if ($('#map_arr_select :selected').data('unit') != '') {
+        html = $('#map_arr_select :selected').data('unit') + '<br>';
+    }
     for (var i = 0; i < varGrades.length; i++) {
         html +=
-            '<i style="background:' + getColor(i/10) + '"></i> ' +
-            varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+                '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
+                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
     }
-    
+
     $('#map_arr .legend').html(html);
 }
 legend.addTo(map_arr);
 
-
-
-
-
-
-
 // Change color scheme on variable selection
 $('#map_arr_select').change(function () {
-    
+
     legend.update();
-    
+
     map_arr_arr_layer.removeFrom(map_arr);
-        
+
     var varName = 'index_' + $('#map_arr_select').val();
 
     function style(feature) {

@@ -36,15 +36,20 @@
 
     container_load = function (e) {
         var focus = $(e).attr('data-value');
-
+        
         if ($(e).hasClass('active') === false) {
 
             $('.sidebar-item.active').removeClass('active');
             $(e).addClass('active');
 
-            $('#main-pane').load('container_tab_' + focus + '.html');
+            $('#main-pane').load('container_tab_' + focus + '.html', function(){
+           
+          $('[data-toggle="tooltip"]').tooltip();
+     
+         window.scrollTo(0, document.body.scrollHeight);
+            });
         }
-        window.scrollTo(0, document.body.scrollHeight);
+       
     };
 
     $('.sidebar-item:nth-of-type(1)').click();

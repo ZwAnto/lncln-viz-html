@@ -60,9 +60,13 @@ Highcharts.chart('hc_kpi_mob', {
                     y: paris.VER,
                     color: '#70a9a1'
                 }, {
+                    name: 'Trilib',
+                    y: paris.TRI,
+                    color: '#40798c'
+                },{
                     name: 'Borne<br>de proprete',
                     y: paris.PRE,
-                    color: '#40798c'
+                    color: '#1F363D'
                 }]
         }]
 });
