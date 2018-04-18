@@ -4,6 +4,7 @@
 @import url('main-pane.css');
 @import url('loading.css');
 @import url('map.css');
+@import url('irisContainer.css');
 
 body{
     background-color: rgb(234, 234, 234);

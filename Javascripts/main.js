@@ -42,14 +42,17 @@ function getColor(d) {
             colors[0];
 }
 
-function geoPropRange(geoJSON,prop){
+function geoPropRange(geoJSON,prop,key,value){
     
     var min = Infinity;
     var max = -Infinity;
     
     for (i=0; i< geoJSON.features.length; i++){
-            min = Math.min(geoJSON.features[i].properties[prop],min);
-            max = Math.max(geoJSON.features[i].properties[prop],max);
+        
+            if (geoJSON.features[i].properties[key] == value || key == null){
+                min = Math.min(geoJSON.features[i].properties[prop],min);
+                max = Math.max(geoJSON.features[i].properties[prop],max);
+            }
     }
     
     return([min,max]);

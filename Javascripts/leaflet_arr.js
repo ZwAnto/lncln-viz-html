@@ -39,17 +39,20 @@ function irisRedirect(e) {
     var layer = e.target;
     var props = layer.feature.properties;
 
-    iris_data = props;
+    $('.sidebar-item.active').removeClass('active');
+    $('.sidebar-item[data-value = iris]').addClass('active');
 
-    $('#main-pane').load('container_tab_iris.html');
-
+    $('#main-pane').load('container_tab_iris.html',function(){
+        var n = parseInt(String(props.insee_com).substring(3, 5)) -1;
+        $('#map_iris_select').val(n).change();
+    });
 }
 
 // Map initialization
 window.map_arr = L.map('map_arr');
 
 // CartoDB
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map_arr);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map_arr);
 
 // Moving zoom control
 map_arr.zoomControl.setPosition('bottomleft');
@@ -116,7 +119,7 @@ legend.onAdd = function (map) {
     for (var i = 0; i < varGrades.length; i++) {
         div.innerHTML +=
                 '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
+                varGrades[i].toLocaleString() + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1].toLocaleString() + '<br>' : '+');
     }
     return div;
 };
@@ -140,7 +143,7 @@ legend.update = function () {
     for (var i = 0; i < varGrades.length; i++) {
         html +=
                 '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
+                varGrades[i].toLocaleString() + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1].toLocaleString() + '<br>' : '+');
     }
 
     $('#map_arr .legend').html(html);

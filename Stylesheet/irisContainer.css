@@ -1,0 +1,19 @@
+#iris_arr_name{
+    padding: 0.5em;
+
+}
+#map_iris_select,
+#map_iris_select:active,
+#map_iris_select:focus{
+    color: rgb(85, 85, 85);
+    font-size: 1.2em;
+    border: none;
+    outline: none;
+    text-align: center;
+    line-height: 1.2em;
+    box-shadow: none;
+    cursor:pointer;
+}
+#map_iris_select > option {
+    font-size: 0.7em;
+}

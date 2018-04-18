@@ -1,122 +1,26 @@
 <div class="row">
     <div class="col-sm-12">
-        <div id="iris_arr_name" class="box" style="
-             padding: 1em;
-             text-align: center;
-             line-height: 2em;
-
-             " >
+        <div id="iris_arr_name" class="box">
+            <select id="map_iris_select" class="custom-select">
+            </select>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-sm-6">
-        <div class='box box-lg'> 
-
-            <div id='map_iris_select_container'>
-                <i class="fas fa-hexagon"></i>
-                <select id="map_iris_selectArea" class="form-control-sm">
-                    <optgroup label="Général">
-                        <option value='p13_pop' data-label="Population" data-unit="Hab.">Population</option>
-                        <option value='typ_iris' data-label="Type" data-unit="">Type d'iris</option>
-                    </optgroup> 
-                    <optgroup label="Dans ma rue">
-                        <option value='graffitis' data-label="Graffiti" data-unit="">Graffiti</option>
-                        <option value='proprete' data-label="Propreté" data-unit="">Propreté</option>
-                        <option value='abandonnes' data-label="Objet abandonnés" data-unit="">Objet abandonnés</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div id='map_iris_select_container' style="margin-top: 3em;">
-                <i class="fas fa-map-marker"></i>
-                <select id="map_iris_selectMarker" class="form-control-sm">
-                    <option disabled selected value style='display:none'></option>
-                    <optgroup label="Mobilier">
-                        <option value='POU' data-label="Poubelles de rue" data-unit="">Poubelles de rue</option>
-                        <option value='POUP' data-label="Poubelles sur piquet" data-unit="">Poubelles sur piquet</option>
-                        <option value='PRE' data-label="Bornes de propreté" data-unit="">Bornes de propreté</option>
-                        <option value='VER' data-label="Colonne de verre" data-unit="">Colonne de verre</option>
-                        <option value='TRI' data-label="TriLib" data-unit="">TriLib</option>
-                    </optgroup>
-                    <optgroup label="Tri mobile">
-                        <option value='triMobileNGeo' data-label="Points de collecte" data-unit="">Points de collecte</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div id='map_iris'></div>
-        </div>
-    </div>
-
-    <div class="col-sm-6" style='padding:0'>
-        <div class='row' style='margin:0'>
-            <div class="col-sm-6">
-                <div class='box box-sm'>
-                    <div class="box-logo">
-                        <div class='wrapper'>
-                            <i class="fal fa-male" aria-hidden='true'></i>
-                        </div>
-                    </div>
-                    <div class='box-header '>Population</div>
-                    <div class='box-content middle'>
-                        <div id='dataIrisPop'>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class='box box-sm'> 
-                    <div class="box-logo">
-                        <div class='wrapper'>
-                            <i class="fal fa-trash-alt" aria-hidden='true'></i>
-                        </div>
-                    </div>
-                    <div class='box-header'>Poubelles de rue</div>
-                    <div class='box-content middle'>
-                        <div id='dataIrisPou'>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class='row' style='margin:0'>
-            <div class="col-sm-6">
-                <div class='box box-sm'>
-                    <div class="box-logo">
-                        <div class='wrapper'>
-                            <i class="fal fa-truck fa-flip-horizontal" aria-hidden='true'></i>
-                        </div>
-                    </div>
-                    <div class='box-header'>Tri mobile</div>
-                    <div class='box-content middle'>
-                        <div id='dataIrisTriMobile'>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+<div class="row" id='iris_subContainer'>
 
 </div>
-<script src='https://zwanto.org/lincoln/Javascripts/leaflet_iris.js'></script>
 <script>
-    
-    var tonnage_hab_comp = '&nbsp;<i class="far ' + (paris.tonnage_hab < iris_data.tonnage_hab ? 'fa-angle-up" style="color:red;"':'fa-angle-down" style="color:green;"') + '></i>';
-    var pou_hab_comp = '&nbsp;<i class="far ' + (paris.pou_hab < iris_data.pou_hab ? 'fa-angle-up" style="color:red;"':'fa-angle-down" style="color:green;"') + '></i>';
-    var pou_m_comp = '&nbsp;<i class="far ' + (paris.pou_m < iris_data.pou_m ? 'fa-angle-up" style="color:red;"':'fa-angle-down" style="color:green;"') + '></i>';
 
-    $('#dataIrisPop').html('<h2>' + iris_data.p13_pop_m.toFixed(2) * 1000 + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + tonnage_hab_comp + '</h2>Kg de déchets / Hab. / An');
-    
-    $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.' + pou_hab_comp + '</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m' + pou_m_comp + '</b>');
-    
-    $('#dataIrisTriMobile').html('<h2>' + iris_data.triMobileN + '</h2>collectes mensuelles<br><br><h2>' + iris_data.triMobileNGeo + '</h2>points de collecte');
-    
-    $('#iris_arr_name').html("<span style=' font-size: 1.3em;'>" + iris_data.nom_com + "</span>&nbsp;&nbsp;\n\
-                            <a onclick=\"$('#main-pane').load('container_tab_arr.html');\">\n\
-                             <i class='fas fa-times-circle' style='color:#42576c;font-size: 1.3em;cursor:pointer'></i>\n\
-                            </a>");
+    for (i = 0; i < arr_geo.features.length; i++) {
+        $('#map_iris_select').append('<option value=' + i + '>' + arr_geo.features[i].properties.nom_com + '</option>');
+    }
+
+    iris_data = arr_geo.features[$('#map_iris_select').val()].properties;
+    $('#iris_subContainer').load('subContainer_tab_iris.html');
+
+    $('#map_iris_select').change(function () {
+        iris_data = arr_geo.features[$('#map_iris_select').val()].properties;
+        $('#iris_subContainer').load('subContainer_tab_iris.html');
+    });
+
 </script>

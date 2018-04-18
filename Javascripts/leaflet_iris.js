@@ -52,7 +52,7 @@ function resetHighlight(e) {
 // Map initialization
 window.map_iris = L.map('map_iris');
 // CartoDB
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map_iris);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png').addTo(map_iris);
 // Moving zoom control
 map_iris.zoomControl.setPosition('bottomleft');
 // Removing credits
@@ -152,7 +152,7 @@ legend.onAdd = function (map) {
 
     var nSplit = 4;
 
-    var varRange = geoPropRange(arr_geo, varName);
+    var varRange = geoPropRange(iris_geo, varName, 'insee_com',iris_data.insee_com);
     var rangeDiff = (varRange[1] - varRange[0]) / nSplit;
     var varGrades = [];
     for (i = 0; i < nSplit; i++) {
@@ -166,9 +166,8 @@ legend.onAdd = function (map) {
         div.innerHTML += $('#map_iris_selectArea :selected').data('unit') + '<br>';
     }
     for (var i = 0; i < varGrades.length; i++) {
-        div.innerHTML +=
-                '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_iris_selectArea :selected').data('unit') + '<br>' : '+');
+        div.innerHTML += '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
+                varGrades[i].toLocaleString() + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1].toLocaleString() + '<br>' : '+');
     }
     return div;
 };
@@ -177,7 +176,7 @@ legend.update = function () {
 
     var nSplit = 4;
 
-    var varRange = geoPropRange(arr_geo, varName);
+    var varRange = geoPropRange(iris_geo, varName);
     var rangeDiff = (varRange[1] - varRange[0]) / nSplit;
     var varGrades = [];
     for (i = 0; i < nSplit; i++) {
@@ -202,7 +201,7 @@ legend.update = function () {
         for (var i = 0; i < varGrades.length; i++) {
             html +=
                     '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                    varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_iris_selectArea :selected').data('unit') + '<br>' : '+');
+                    varGrades[i].toLocaleString() + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1].toLocaleString() + '<br>' : '+');
         }
     }
     $('#map_iris .legend').html(html);
@@ -255,7 +254,7 @@ $('#map_iris_selectMarker').change(function () {
             $.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=trilib&rows=10000&facet=collectfrequency&facet=localisationfo_postalcode&facet=wastecontainermodelfo_model&facet=wastecontainermodelfo_type&facet=wastecontainermodelfo_manufacturer&facet=wastetype_designation', function (data) {
                 var json = data.records;
                 var out = [];
-                
+
                 for (var i = 0; i < json.length; i++) {
                     var key = 'k' + json[i].fields.localisationfo_number;
                     if (!out[ key ]) {
@@ -265,13 +264,16 @@ $('#map_iris_selectMarker').change(function () {
                         out[ key ][ out[ key ].length ] = json[i].fields;
                     }
                 }
-                
+
                 for (var i in out) {
-                     var marker = L.marker(out[i][0].geo, {icon: customIcon});
-                   
-                     marker.bindPopup("test");
-                    
-                    markers.addLayer(marker);
+
+                    if (out[i][0].localisationfo_postalcode.substr(3, 5) === String(iris_data.insee_com).substring(3, 5)) {
+                        var marker = L.marker(out[i][0].geo, {icon: customIcon});
+
+                        marker.bindPopup("test");
+
+                        markers.addLayer(marker);
+                    }
                 }
             });
         } else {
