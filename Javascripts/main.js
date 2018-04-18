@@ -35,9 +35,9 @@ function getColor(d) {
             d > 0.25 ? colors[1] :
 
             // iris type color
-            d == 'A' ? colorPal[2] :
-            d == 'H' ? colorPal[1] :
-            d == 'D' ? colorPal[0] :
+            d == 'A' ? colors[3] :
+            d == 'H' ? colors[1] :
+            d == 'D' ? colors[0] :
             
             colors[0];
 }

@@ -116,7 +116,7 @@ legend.onAdd = function (map) {
     for (var i = 0; i < varGrades.length; i++) {
         div.innerHTML +=
                 '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
     }
     return div;
 };
@@ -140,7 +140,7 @@ legend.update = function () {
     for (var i = 0; i < varGrades.length; i++) {
         html +=
                 '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_arr_select :selected').data('unit') + '<br>' : '+');
     }
 
     $('#map_arr .legend').html(html);

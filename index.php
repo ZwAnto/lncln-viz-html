@@ -49,7 +49,7 @@ if ($_SERVER['HTTPS'] != 'on') {
         <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>   
 
         <!-- Font Awesome -->
-        <script defer src='https://zwanto.org/lincoln/Libs/fontawesome/fontawesome-all.js'></script>
+        <script defer src="https://pro.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-+1nLPoB0gaUktsZJP+ycZectl3GX7wP8Xf2PE/JHrb7X1u7Emm+v7wJMbAcPr8Ge" crossorigin="anonymous"></script>
 
         <!-- Elastic Search 
         <script defer src='https://zwanto.org/lincoln/Libs/elasticsearch-js/elasticsearch.js'></script>-->

@@ -168,7 +168,7 @@ legend.onAdd = function (map) {
     for (var i = 0; i < varGrades.length; i++) {
         div.innerHTML +=
                 '<i style="background:' + getColor((i + 1) / nSplit) + '"></i> ' +
-                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + '<br>' : '+');
+                varGrades[i] + (varGrades[i + 1] ? '&ndash;' + varGrades[i + 1] + ' ' + $('#map_iris_selectArea :selected').data('unit') + '<br>' : '+');
     }
     return div;
 };
@@ -244,29 +244,55 @@ $('#map_iris_selectArea').change(function () {
         }}).addTo(map_iris);
 
 });
+
 $('#map_iris_selectMarker').change(function () {
     var varName = 'indexArr_' + $('#map_iris_selectMarker').val();
     markers.removeLayers(markers.getLayers());
     if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Mobilier') {
+        if ($('#map_iris_selectMarker').val() == 'TRI') {
 
-        markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
-            pointToLayer: function (feature, latlng) {
-                var marker =  L.marker(latlng, {icon: customIcon});
-                return marker;
-            },
-            filter: function (feature, layer) {
-                if (feature.properties.type == $('#map_iris_selectMarker :selected').attr('value')) {
-                    return true;
+
+            $.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=trilib&rows=10000&facet=collectfrequency&facet=localisationfo_postalcode&facet=wastecontainermodelfo_model&facet=wastecontainermodelfo_type&facet=wastecontainermodelfo_manufacturer&facet=wastetype_designation', function (data) {
+                var json = data.records;
+                var out = [];
+                
+                for (var i = 0; i < json.length; i++) {
+                    var key = 'k' + json[i].fields.localisationfo_number;
+                    if (!out[ key ]) {
+                        out[ key ] = [];
+                        out[ key ][0] = json[i].fields;
+                    } else {
+                        out[ key ][ out[ key ].length ] = json[i].fields;
+                    }
                 }
-            }}));
-
+                
+                for (var i in out) {
+                     var marker = L.marker(out[i][0].geo, {icon: customIcon});
+                   
+                     marker.bindPopup("test");
+                    
+                    markers.addLayer(marker);
+                }
+            });
+        } else {
+            markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
+                pointToLayer: function (feature, latlng) {
+                    var marker = L.marker(latlng, {icon: customIcon});
+                    return marker;
+                },
+                filter: function (feature, layer) {
+                    if (feature.properties.type == $('#map_iris_selectMarker :selected').attr('value')) {
+                        return true;
+                    }
+                }}));
+        }
     } else if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Tri mobile') {
 
         markers.addLayer(L.geoJSON(triMobile_geo, {
             pointToLayer: function (feature, latlng) {
-                var marker =  L.marker(latlng, {icon: customIcon});
+                var marker = L.marker(latlng, {icon: customIcon});
                 marker.bindPopup("<b>Adresse:</b> " + feature.properties['adresse'] +
-                        "<br><b>Horaires:</b> " + feature.properties['horaires'] + 
+                        "<br><b>Horaires:</b> " + feature.properties['horaires'] +
                         "<br><b>Jours:</b> " + feature.properties['jours.de.tenue']);
                 return marker;
             },
