@@ -97,20 +97,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="box" style="
-
-                     text-align: center;
-                     line-height: 15em;
-                     background-color: #42576c;
-                     color: white;
-                     cursor: pointer;
-
-
-                     " onclick="$('#main-pane').load('container_tab_arr.html');"> 
-                    <span style=' font-size: 1.2em;'><i class="fal fa-arrow-alt-from-right"></i> Retour</span>
-                </div>
-            </div>
         </div>
 
     </div>
@@ -121,5 +107,8 @@
                  $('#dataIrisPop').html('<h2>' + iris_data.p13_pop_m.toFixed(2) * 1000 + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + '</h2>Kg de déchets / Hab. / An');
                  $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m</b>');
                  $('#dataIrisTriMobile').html('<h2>' + iris_data.triMobileN + '</h2>collectes mensuelles<br><br><h2>' + iris_data.triMobileNGeo + '</h2>points de collecte');
-                 $('#iris_arr_name').html("<span style=' font-size: 1.3em;'>" + iris_data.nom_com + "</span>");
+                 $('#iris_arr_name').html("<span style=' font-size: 1.3em;'>" + iris_data.nom_com + "</span>&nbsp;&nbsp;\n\
+                                           <a onclick=\"$('#main-pane').load('container_tab_arr.html');\">\n\
+                                            <i class='fas fa-times-circle' style='color:#42576c;font-size: 1.3em;cursor:pointer'></i>\n\
+                                           </a>");
 </script>
