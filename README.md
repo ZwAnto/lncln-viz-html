@@ -12,3 +12,6 @@ Lien vers l'application: [zwanto.org](https://zwanto.org/lincoln/)
 ### Complémentaires
 
 ## Technologie utilisées
+### Bootstrap 
+Lien: [Boostrap](https://getbootstrap.com/)
+L'intéret d'utiliser boostrap est de pouvoir construire des interfaces web rapidement et qui s'adapte très bien sur les smartphones.
