@@ -42,13 +42,7 @@ if ($_SERVER['HTTPS'] != 'on') {
         
         <!-- Highcharts -->
         <script src="https://code.highcharts.com/highcharts.src.js"></script>
-<<<<<<< HEAD
         <script src="https://code.highcharts.com/highcharts-more.js"></script>
-=======
-        
-        <!-- Highmaps -->
-        <script src="https://code.highcharts.com/maps/highmaps.js"></script>
->>>>>>> a200af8be21a2bdcd375cd91adc4fdc64f1ef464
 
         <!-- Leaflet -->
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>   
