@@ -2,7 +2,7 @@ var breaks_color_iris = [10, 100, 200, 400, 600, 800, 1000];
 
 function styleIris(feature) {
     return {
-        fillColor: getColor(feature.properties.n, breaks_color_iris),
+        fillColor: getColorIris(feature.properties.n, breaks_color_iris),
         weight: 0.8,
         opacity: 0.8,
         color: 'white',
