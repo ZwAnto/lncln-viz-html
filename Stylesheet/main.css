@@ -5,7 +5,7 @@
 @import url('loading.css');
 @import url('map.css');
 @import url('irisContainer.css');
-
+@import url('trilibDetail.css');
 body{
     background-color: rgb(234, 234, 234);
     font-family: 'lincoln', "Helvetica Neue", Helvetica, Arial, sans-serif;
