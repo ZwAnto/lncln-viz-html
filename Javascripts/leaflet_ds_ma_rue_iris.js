@@ -11,7 +11,7 @@ function styleIris(feature) {
     };
 }
 
-function getColor(d, breaks_color) {
+function getColorIris(d, breaks_color) {
     return d > breaks_color[6] ? '#800026' :
         d > breaks_color[5] ? '#BD0026' :
             d > breaks_color[4] ? '#E31A1C' :
@@ -51,7 +51,7 @@ irisLegend.onAdd = function (map) {
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + getColor((grades[i] + 1), breaks_color_iris) + '"></i> ' +
+            '<i style="background:' + getColorIris((grades[i] + 1), breaks_color_iris) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
     }
 
