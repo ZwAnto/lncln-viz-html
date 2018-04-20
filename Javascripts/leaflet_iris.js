@@ -42,10 +42,10 @@ function resetHighlight(e) {
     map_iris_iris_layer.resetStyle(e.target);
     info.update();
 }
-function trilibLabel(str){
-    var label = str === 'Glass' ? 'Verre':
-                str === 'Can / Plastic' ? 'Plastique & metal':
-                'Parpier & carton';
+function trilibLabel(str) {
+    var label = str === 'Glass' ? 'Verre' :
+            str === 'Can / Plastic' ? 'Plastique & metal' :
+            'Parpier & carton';
     return(label);
 }
 /*================================================
@@ -159,7 +159,7 @@ legend.onAdd = function (map) {
 
     var nSplit = 4;
 
-    var varRange = geoPropRange(iris_geo, varName, 'insee_com',iris_data.insee_com);
+    var varRange = geoPropRange(iris_geo, varName, 'insee_com', iris_data.insee_com);
     var rangeDiff = (varRange[1] - varRange[0]) / nSplit;
     var varGrades = [];
     for (i = 0; i < nSplit; i++) {
@@ -278,41 +278,60 @@ $('#map_iris_selectMarker').change(function () {
                         var marker = L.marker(out[i][0].geo, {icon: customIcon});
 
                         var html = '<div class="trilibDetailContainer">';
-                        
-                        for (j=0;j<out[i].length;j++){
-                            if (j === 1){
-                                html += '<div class="trilibDetail" data-value=' + j + ' style="display:block";>';
+
+                        for (j = 0; j < out[i].length; j++) {
+                            if (j === 0) {
+                                html += '<div class="trilibDetail" data-value=' + j + ' style="display:block"; data-state="active">';
                             } else {
-                                 html += '<div class="trilibDetail" data-value=' + j + '>';
+                                html += '<div class="trilibDetail" data-value=' + j + '>';
                             }
-                            
+
                             html += '<b>Adresse</b>: ' + out[i][j].localisationfo_street + '<br>';
-                            html += '<b>Modèle</b>: ' +  out[i][j].wastecontainermodelfo_model + '<br>';
+                            html += '<b>Modèle</b>: ' + out[i][j].wastecontainermodelfo_model + '<br>';
                             html += '<b>Type de déchet</b>: ' + trilibLabel(out[i][j].wastetype_designation) + '<br>';
-                            html += '<b>Date</b>: ' + out[i][j].fillingratedate.substr(0,10) + '<br>';
-                            html += '<b>Taux de remplissage</b>: ' + Math.round(out[i][j].fillingrate*out[i][j].fillinglimit/100) + ' %<br>';
-                            html += '<b>Taux de remplissage journalier (moy.)</b>: ' + Math.round(out[i][j].avgfillingrateperday*out[i][j].fillinglimit/100) + ' %<br>';
+                            html += '<b>Date</b>: ' + out[i][j].fillingratedate.substr(0, 10) + '<br>';
+                            html += '<b>Taux de remplissage</b>: ' + Math.round(out[i][j].fillingrate * out[i][j].fillinglimit / 100) + ' %<br>';
+                            html += '<b>Taux de remplissage journalier (moy.)</b>: ' + Math.round(out[i][j].avgfillingrateperday * out[i][j].fillinglimit / 100) + ' %<br>';
                             html += '</div>';
                         }
-                        
-                        html += '</div><div class="trilibDetailNav"><a class="prev"><i class="fas fa-chevron-left"></i></a>' + out[i].length + '<a class="next"><i class="fas fa-chevron-right"></i></a></div>';
-                    
+
+                        html += '</div><br><div class="trilibDetailNav"><a class="prev"><i class="fas fa-chevron-left"></i></a><span class="tilibNavPos">1</span>/' + out[i].length + '<a class="next"><i class="fas fa-chevron-right"></i></a></div>';
+
                         marker.bindPopup(html);
 
-                        markers.addLayer(marker);
-                        $('.leaflet-marker-icon').click(function(){
-                            setTimeout(function(){
-     $(".trilibDetailNav .next").click(function() {alert("lol");});
-}, 50);
-                          
+                        marker.on('popupopen', function () {
+                            $(".trilibDetailNav .prev").click(function () {
+                                var active = $(".trilibDetail[data-state='active']").data('value') + 1;
+                                var prev = active - 1;
+                                if ($(".trilibDetail:nth-of-type(" + prev + ")").length) {
+                                    $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
+                                    $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
+                                    $(".trilibDetail:nth-of-type(" + prev + ")").css('display', 'block');
+                                    $(".trilibDetail:nth-of-type(" + prev + ")").attr('data-state', 'active');
+                                    $(".tilibNavPos").html(prev);
+                                }
+                            });
+
+                            $(".trilibDetailNav .next").click(function () {
+                                var active = $(".trilibDetail[data-state='active']").data('value') + 1;
+                                var next = active + 1;
+                                if ($(".trilibDetail:nth-of-type(" + next + ")").length) {
+                                    $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
+                                    $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
+                                    $(".trilibDetail:nth-of-type(" + next + ")").css('display', 'block');
+                                    $(".trilibDetail:nth-of-type(" + next + ")").attr('data-state', 'active');
+                                    $(".tilibNavPos").html(next);
+                                }
+                            });
                         });
-                        
+
+                        markers.addLayer(marker);
                     }
                 }
             });
-            
-          
-            
+
+
+
         } else {
             markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
                 pointToLayer: function (feature, latlng) {

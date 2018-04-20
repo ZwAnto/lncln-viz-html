@@ -1,3 +1,18 @@
 .trilibDetail{
     display: none;
 }
+.trilibDetailNav {
+    text-align:center;
+    user-select: none;
+    line-height: 2em;
+}
+
+.trilibDetailNav a{
+    width: 4em;
+}
+.trilibDetailNav a:nth-of-type(1){
+    float:left;
+}
+.trilibDetailNav a:nth-of-type(2){
+    float:right;
+}

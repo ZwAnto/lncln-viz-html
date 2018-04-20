@@ -90,11 +90,14 @@
     </div>
 <script src='https://zwanto.org/lincoln/Javascripts/leaflet_iris.js'></script>
 <script>
-     var tonnage_hab_comp = '&nbsp;<i class="far ' + (paris.tonnage_hab < iris_data.tonnage_hab ? 'fa-angle-up" style="color:red;"' : 'fa-angle-down" style="color:green;"') + '></i>';
+    var tonnage_hab_comp = '&nbsp;<i class="far ' + (paris.tonnage_hab < iris_data.tonnage_hab ? 'fa-angle-up" style="color:red;"' : 'fa-angle-down" style="color:green;"') + '></i>';
     var pou_hab_comp = '&nbsp;<i class="far ' + (paris.pou_hab < iris_data.pou_hab ? 'fa-angle-up" style="color:red;"' : 'fa-angle-down" style="color:green;"') + '></i>';
     var pou_m_comp = '&nbsp;<i class="far ' + (paris.pou_m < iris_data.pou_m ? 'fa-angle-up" style="color:red;"' : 'fa-angle-down" style="color:green;"') + '></i>';
+    var p13_pop_comp = '&nbsp;<i class="far ' + (paris.p13_pop/20 < iris_data.p13_pop ? 'fa-angle-up"' : 'fa-angle-down"') + '></i>';
 
-    $('#dataIrisPop').html('<h2>' + iris_data.p13_pop_m.toFixed(2) * 1000 + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + tonnage_hab_comp + '</h2>Kg de déchets / Hab. / An');
+    var iris_pop = iris_data.p13_pop / 1000;
+
+    $('#dataIrisPop').html('<h2>' + iris_pop.toFixed(0) + p13_pop_comp + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + tonnage_hab_comp + '</h2>Kg de déchets / Hab. / An');
 
     $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.' + pou_hab_comp + '</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m' + pou_m_comp + '</b>');
 
