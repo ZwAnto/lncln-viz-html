@@ -80,8 +80,8 @@ var map_iris_iris_layer = L.geoJSON(iris_geo, {
 // Set map focus on paris
 map_iris.fitBounds(map_iris_iris_layer.getBounds());
 // Map limitation
-map_iris.setMaxBounds(map_iris_iris_layer.getBounds());
-map_iris.setMinZoom(map_iris.getZoom());
+//map_iris.setMaxBounds(map_iris_iris_layer.getBounds());
+//map_iris.setMinZoom(map_iris.getZoom());
 
 /*--- Marker initialization --------------------*/
 
