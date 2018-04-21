@@ -32,7 +32,8 @@
 
 
 #map_arr_select_container,
-#map_iris_select_container{
+#map_iris_select_container,
+#map_detail_select_container {
     position: absolute;
     margin: 0.5em;
     z-index: 1;
@@ -41,12 +42,14 @@
 }
 
 #map_arr_select_container:hover,
-#map_iris_select_container:hover{
+#map_iris_select_container:hover,
+#map_detail_select_container:hover{
        opacity: 1;
 }
 
 #map_arr_select_container > svg,
-#map_iris_select_container > svg{
+#map_iris_select_container > svg,
+#map_detail_select_container > svg{
     width:1em;
 }
 

@@ -1,5 +1,4 @@
 
-var colors = genColorGradient(mainColor,5);
 // Build the chart
 Highcharts.chart('hc_kpi_mob', {
     chart: {
@@ -52,23 +51,23 @@ Highcharts.chart('hc_kpi_mob', {
             data: [{
                     name: 'Poubelle <br>de rue',
                     y: paris.POU,
-                    color: colors[4]
+                    color: colorPal[4]
                 }, {
                     name: 'Poubelle <br>sur piquet',
                     y: paris.POUP,
-                    color: colors[3]
+                    color: colorPal[3]
                 }, {
                     name: 'Colonne<br>de verre',
                     y: paris.VER,
-                    color: colors[2]
+                    color: colorPal[2]
                 }, {
                     name: 'Trilib',
                     y: paris.TRI,
-                    color: colors[1]
+                    color: colorPal[1]
                 },{
                     name: 'Borne<br>de proprete',
                     y: paris.PRE,
-                    color: colors[0]
+                    color: colorPal[0]
                 }]
         }]
 });

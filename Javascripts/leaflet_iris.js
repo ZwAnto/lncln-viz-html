@@ -14,8 +14,8 @@ function onEachFeature(feature, layer) {
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.indexArr_p13_pop_m),
-        weight: 2,
-        opacity: 1,
+        weight: 1,
+        opacity: 0.8,
         color: 'white',
         dashArray: '',
         fillOpacity: 0.7
@@ -39,7 +39,15 @@ function highlightFeature(e) {
     info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
-    map_iris_iris_layer.resetStyle(e.target);
+        var layer = e.target;
+    
+    layer.setStyle({
+        weight: 1,
+        color: 'white',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    map_iris_bound_layer.bringToFront();
     info.update();
 }
 function trilibLabel(str) {
@@ -74,7 +82,14 @@ var map_iris_iris_layer = L.geoJSON(iris_geo, {
             return true;
         }
     }}).addTo(map_iris);
-
+var map_iris_bound_layer = L.geoJSON(arr_geo, {
+         interactive: false,
+    style: {fillOpacity: 0, weight: 1, color: '#2e5173'},
+    filter: function (feature, layer) {
+        if (feature.properties.insee_com == iris_data.insee_com) {
+            return true;
+        }
+    }}).setZIndex(2).addTo(map_iris);
 /*--- Map restriction --------------------------*/
 
 // Set map focus on paris
@@ -227,33 +242,33 @@ $('#map_iris_selectArea').change(function () {
     } else {
         var varName = 'indexArr_' + $('#map_iris_selectArea').val();
     }
-    map_iris_iris_layer.removeFrom(map_iris);
+    map_iris_iris_layer.clearLayers();
 
     function style(feature) {
         return {
             fillColor: getColor(feature.properties[varName]),
-            weight: 2,
-            opacity: 1,
+            weight: 1,
+            opacity: 0.8,
             color: 'white',
             dashArray: '',
             fillOpacity: 0.7
         };
     }
 
-    map_iris_iris_layer = L.geoJSON(iris_geo, {
+    L.geoJSON(iris_geo, {
         onEachFeature: onEachFeature,
         style: style,
         filter: function (feature, layer) {
             if (feature.properties.insee_com == iris_data.insee_com) {
                 return true;
             }
-        }}).addTo(map_iris);
-
+        }}).addTo(map_iris_iris_layer);
+map_iris_bound_layer.bringToFront();
 });
 
 $('#map_iris_selectMarker').change(function () {
     var varName = 'indexArr_' + $('#map_iris_selectMarker').val();
-    markers.removeLayers(markers.getLayers());
+    markers.clearLayers();
     if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Mobilier') {
         if ($('#map_iris_selectMarker').val() == 'TRI') {
 

@@ -9,8 +9,8 @@ function onEachFeature(feature, layer) {
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.index_p13_pop_m),
-        weight: 2,
-        opacity: 1,
+         weight: 1,
+        opacity: 0.8,
         color: 'white',
         dashArray: '',
         fillOpacity: 0.7
@@ -32,7 +32,15 @@ function highlightFeature(e) {
     info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
-    map_arr_arr_layer.resetStyle(e.target);
+        var layer = e.target;
+    
+    layer.setStyle({
+        weight: 1,
+        color: 'white',
+        dashArray: '',
+        fillOpacity: 0.7
+    });
+    map_arr_bound_layer.bringToFront();
     info.update();
 }
 function irisRedirect(e) {
@@ -62,6 +70,10 @@ $('.leaflet-control-attribution').remove();
 
 // Adding arr bounding to map
 map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: style}).addTo(map_arr);
+var map_arr_bound_layer = L.geoJSON(paris_geo, {
+    interactive: false,
+    style: {fillOpacity:0,weight:1,color:'#2e5173'}
+}).addTo(map_arr);
 
 // Set map focus on paris
 map_arr.fitBounds(map_arr_arr_layer.getBounds());
@@ -155,20 +167,21 @@ $('#map_arr_select').change(function () {
 
     legend.update();
 
-    map_arr_arr_layer.removeFrom(map_arr);
+    map_arr_arr_layer.clearLayers();
 
     var varName = 'index_' + $('#map_arr_select').val();
 
     function style(feature) {
         return {
             fillColor: getColor(feature.properties[varName]),
-            weight: 2,
-            opacity: 1,
-            color: 'white',
-            dashArray: '',
-            fillOpacity: 0.7
+              weight: 1,
+        opacity: 0.8,
+        color: 'white',
+        dashArray: '',
+        fillOpacity: 0.7
         };
     }
 
-    map_arr_arr_layer = L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: style}).addTo(map_arr);
+    L.geoJSON(arr_geo, {onEachFeature: onEachFeature, style: style}).addTo(map_arr_arr_layer);
+    map_arr_bound_layer.bringToFront();
 });
