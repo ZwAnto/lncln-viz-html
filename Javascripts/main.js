@@ -26,6 +26,8 @@ function genColorGradient(hexColor, n) {
     }
     
 colorPal= ['#1F363D','#40798C','#70A9A1','#9EC1A3','#CFE0C3'];
+colorPal_r = ["#CFE0C3", "#9EC1A3", "#70A9A1", "#40798C", "#1F363D"];
+
 mainColor = colorPal[3];
 colors = genColorGradient('#2e5173', 5);
 

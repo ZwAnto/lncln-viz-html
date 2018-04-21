@@ -69,5 +69,5 @@ Highcharts.chart('hc_paris_tonnage', {
         }
     },
     series: tonnage_paris,
-    colors: colorPal.reverse()
+    colors: colorPal_r
 });

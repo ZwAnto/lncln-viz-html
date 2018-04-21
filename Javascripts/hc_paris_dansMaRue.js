@@ -38,5 +38,5 @@ Highcharts.chart('hc_paris_dansMaRue', {
         }  
     },
     series: dansMarue_paris,
-    colors: colorPal
+    colors: colorPal_r
 });
