@@ -36,7 +36,7 @@ Highcharts.chart('hc_arr_scatter', {
                 enabled: true,
                 format: '{point.name}'
             },
-            color: colorPal[3],
+            color: mainColor,
             showInLegend: false
         }
     },

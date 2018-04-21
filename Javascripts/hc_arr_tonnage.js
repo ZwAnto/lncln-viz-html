@@ -38,7 +38,7 @@ hc_arr_tonnage = Highcharts.chart('hc_arr_tonnage', {
         }
     },
     series: $.extend(true,[],tonnage_arr),
-    colors: genColorGradient('#9EC1A3', 20)
+    colors: genColorGradient(mainColor, 20)
 });
 
 $('#arr_tonnage_check').click(function () {

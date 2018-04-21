@@ -37,5 +37,6 @@ Highcharts.chart('hc_paris_dansMaRue', {
             text: null
         }  
     },
-    series: dansMarue_paris
+    series: dansMarue_paris,
+    colors: genColorGradient(mainColor,4).reverse()
 });

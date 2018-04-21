@@ -45,6 +45,6 @@ Highcharts.chart('hc_arr_tonnageHab', {
     yAxis: {
         visible: false
     },
-    colors: genColorGradient(colorPal[3],20).reverse() ,
+    colors: genColorGradient(mainColor,20).reverse() ,
     series: tonnageHab_arr
 });

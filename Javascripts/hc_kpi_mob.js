@@ -1,3 +1,5 @@
+
+var colors = genColorGradient(mainColor,5);
 // Build the chart
 Highcharts.chart('hc_kpi_mob', {
     chart: {
@@ -50,23 +52,24 @@ Highcharts.chart('hc_kpi_mob', {
             data: [{
                     name: 'Poubelle <br>de rue',
                     y: paris.POU,
-                    color: '#cfe0c3'
+                    color: colors[4]
                 }, {
                     name: 'Poubelle <br>sur piquet',
                     y: paris.POUP,
-                    color: '#9ec1a3'
+                    color: colors[3]
                 }, {
                     name: 'Colonne<br>de verre',
                     y: paris.VER,
-                    color: '#70a9a1'
+                    color: colors[2]
                 }, {
                     name: 'Trilib',
                     y: paris.TRI,
-                    color: '#40798c'
+                    color: colors[1]
                 },{
                     name: 'Borne<br>de proprete',
                     y: paris.PRE,
-                    color: '#1F363D'
+                    color: colors[0]
                 }]
         }]
 });
+
