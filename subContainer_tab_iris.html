@@ -11,7 +11,7 @@
                     <optgroup label="Dans ma rue">
                         <option value='graffitis' data-label="Graffiti" data-unit="">Graffiti</option>
                         <option value='proprete' data-label="Propreté" data-unit="">Propreté</option>
-                        <option value='abandonnes' data-label="Objet abandonnés" data-unit="">Objet abandonnés</option>
+                        <option value='abandonnes' data-label="Objet abandonnés" data-unit="">Objets abandonnés</option>
                     </optgroup>
                 </select>
             </div>
@@ -99,7 +99,7 @@
 
     $('#dataIrisPop').html('<h2>' + iris_pop.toFixed(0) + p13_pop_comp + '</h2>Mille Hab.<br><br><h2>' + Math.round(iris_data.tonnage_hab) + tonnage_hab_comp + '</h2>Kg de déchets / Hab. / An');
 
-    $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.' + pou_hab_comp + '</b><br><i class="fal fa-map-marker"></i> tout les <b>' + Math.round(iris_data.pou_m) + ' m' + pou_m_comp + '</b>');
+    $('#dataIrisPou').html('<h2>1</h2>Poubelle<br><br><i class="fal fa-male"></i> pour <b>' + Math.round(iris_data.pou_hab) + ' Hab.' + pou_hab_comp + '</b><br><i class="fal fa-map-marker"></i> tous les <b>' + Math.round(iris_data.pou_m) + ' m' + pou_m_comp + '</b>');
 
     $('#dataIrisTriMobile').html('<h2>' + iris_data.triMobileN + '</h2>collectes mensuelles<br><br><h2>' + iris_data.triMobileNGeo + '</h2>points de collecte');
 </script>
