@@ -14,7 +14,7 @@ if ($_SERVER['HTTPS'] != 'on') {
         <!-- meta tags -->
         <meta charset="UTF-8">
         <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
-        <meta name="theme-color" content="#e71e62">       
+        <meta name="theme-color" content="#42576c">       
 
         <!-- Font from lincoln.fr -->
         <style type='text/css'>
