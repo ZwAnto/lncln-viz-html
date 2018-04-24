@@ -44,7 +44,7 @@
     width:1em;
 }
 .map-select-container select {
-    max-width:50%;
+    max-width:15em;
 }
 .leaflet-div-icon {
     border: none;
