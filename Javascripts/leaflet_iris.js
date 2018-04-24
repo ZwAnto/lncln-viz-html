@@ -39,8 +39,8 @@ function highlightFeature(e) {
     info.update(layer.feature.properties);
 }
 function resetHighlight(e) {
-        var layer = e.target;
-    
+    var layer = e.target;
+
     layer.setStyle({
         weight: 1,
         color: 'white',
@@ -83,7 +83,7 @@ var map_iris_iris_layer = L.geoJSON(iris_geo, {
         }
     }}).addTo(map_iris);
 var map_iris_bound_layer = L.geoJSON(arr_geo, {
-         interactive: false,
+    interactive: false,
     style: {fillOpacity: 0, weight: 1, color: '#2e5173'},
     filter: function (feature, layer) {
         if (feature.properties.insee_com == iris_data.insee_com) {
@@ -263,102 +263,25 @@ $('#map_iris_selectArea').change(function () {
                 return true;
             }
         }}).addTo(map_iris_iris_layer);
-map_iris_bound_layer.bringToFront();
+    map_iris_bound_layer.bringToFront();
 });
 
 $('#map_iris_selectMarker').change(function () {
     var varName = 'indexArr_' + $('#map_iris_selectMarker').val();
     markers.clearLayers();
     if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Mobilier') {
-        if ($('#map_iris_selectMarker').val() == 'TRI') {
 
-
-            $.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=trilib&rows=10000&facet=collectfrequency&facet=localisationfo_postalcode&facet=wastecontainermodelfo_model&facet=wastecontainermodelfo_type&facet=wastecontainermodelfo_manufacturer&facet=wastetype_designation', function (data) {
-                var json = data.records;
-                var out = [];
-
-                for (var i = 0; i < json.length; i++) {
-                    var key = 'k' + json[i].fields.localisationfo_number;
-                    if (!out[ key ]) {
-                        out[ key ] = [];
-                        out[ key ][0] = json[i].fields;
-                    } else {
-                        out[ key ][ out[ key ].length ] = json[i].fields;
-                    }
+        markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
+            pointToLayer: function (feature, latlng) {
+                var marker = L.marker(latlng, {icon: customIcon});
+                return marker;
+            },
+            filter: function (feature, layer) {
+                if (feature.properties.type == $('#map_iris_selectMarker :selected').attr('value')) {
+                    return true;
                 }
+            }}));
 
-                for (var i in out) {
-
-                    if (out[i][0].localisationfo_postalcode.substr(3, 5) === String(iris_data.insee_com).substring(3, 5)) {
-                        var marker = L.marker(out[i][0].geo, {icon: customIcon});
-
-                        var html = '<div class="trilibDetailContainer">';
-
-                        for (j = 0; j < out[i].length; j++) {
-                            if (j === 0) {
-                                html += '<div class="trilibDetail" data-value=' + j + ' style="display:block"; data-state="active">';
-                            } else {
-                                html += '<div class="trilibDetail" data-value=' + j + '>';
-                            }
-
-                            html += '<b>Adresse</b>: ' + out[i][j].localisationfo_street + '<br>';
-                            html += '<b>Modèle</b>: ' + out[i][j].wastecontainermodelfo_model + '<br>';
-                            html += '<b>Type de déchet</b>: ' + trilibLabel(out[i][j].wastetype_designation) + '<br>';
-                            html += '<b>Date</b>: ' + out[i][j].fillingratedate.substr(0, 10) + '<br>';
-                            html += '<b>Taux de remplissage</b>: ' + Math.round(out[i][j].fillingrate * out[i][j].fillinglimit / 100) + ' %<br>';
-                            html += '<b>Taux de remplissage journalier (moy.)</b>: ' + Math.round(out[i][j].avgfillingrateperday * out[i][j].fillinglimit / 100) + ' %<br>';
-                            html += '</div>';
-                        }
-
-                        html += '</div><br><div class="trilibDetailNav"><a class="prev"><i class="fas fa-chevron-left"></i></a><span class="tilibNavPos">1</span>/' + out[i].length + '<a class="next"><i class="fas fa-chevron-right"></i></a></div>';
-
-                        marker.bindPopup(html);
-
-                        marker.on('popupopen', function () {
-                            $(".trilibDetailNav .prev").click(function () {
-                                var active = $(".trilibDetail[data-state='active']").data('value') + 1;
-                                var prev = active - 1;
-                                if ($(".trilibDetail:nth-of-type(" + prev + ")").length) {
-                                    $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
-                                    $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
-                                    $(".trilibDetail:nth-of-type(" + prev + ")").css('display', 'block');
-                                    $(".trilibDetail:nth-of-type(" + prev + ")").attr('data-state', 'active');
-                                    $(".tilibNavPos").html(prev);
-                                }
-                            });
-
-                            $(".trilibDetailNav .next").click(function () {
-                                var active = $(".trilibDetail[data-state='active']").data('value') + 1;
-                                var next = active + 1;
-                                if ($(".trilibDetail:nth-of-type(" + next + ")").length) {
-                                    $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
-                                    $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
-                                    $(".trilibDetail:nth-of-type(" + next + ")").css('display', 'block');
-                                    $(".trilibDetail:nth-of-type(" + next + ")").attr('data-state', 'active');
-                                    $(".tilibNavPos").html(next);
-                                }
-                            });
-                        });
-
-                        markers.addLayer(marker);
-                    }
-                }
-            });
-
-
-
-        } else {
-            markers.addLayer(L.geoJSON(window['mobilier_' + iris_data.insee_com + '_geo'], {
-                pointToLayer: function (feature, latlng) {
-                    var marker = L.marker(latlng, {icon: customIcon});
-                    return marker;
-                },
-                filter: function (feature, layer) {
-                    if (feature.properties.type == $('#map_iris_selectMarker :selected').attr('value')) {
-                        return true;
-                    }
-                }}));
-        }
     } else if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Tri mobile') {
 
         markers.addLayer(L.geoJSON(triMobile_geo, {
@@ -375,6 +298,77 @@ $('#map_iris_selectMarker').change(function () {
                 }
             }}));
 
-    }
+    } else if ($('#map_iris_selectMarker :selected').closest('optgroup').attr('label') == 'Trilib') {
+        $.get('https://opendata.paris.fr/api/records/1.0/search/?dataset=trilib&rows=10000&facet=collectfrequency&facet=localisationfo_postalcode&facet=wastecontainermodelfo_model&facet=wastecontainermodelfo_type&facet=wastecontainermodelfo_manufacturer&facet=wastetype_designation', function (data) {
+            var json = data.records;
+            var out = [];
 
+            for (var i = 0; i < json.length; i++) {
+                var key = 'k' + json[i].fields.localisationfo_number;
+                if (!out[ key ]) {
+                    out[ key ] = [];
+                    out[ key ][0] = json[i].fields;
+                } else {
+                    out[ key ][ out[ key ].length ] = json[i].fields;
+                }
+            }
+
+            for (var i in out) {
+
+                if (out[i][0].localisationfo_postalcode.substr(3, 5) === String(iris_data.insee_com).substring(3, 5)) {
+                    var marker = L.marker(out[i][0].geo, {icon: customIcon});
+
+                    var html = '<div class="trilibDetailContainer">';
+
+                    for (j = 0; j < out[i].length; j++) {
+                        if (j === 0) {
+                            html += '<div class="trilibDetail" data-value=' + j + ' style="display:block"; data-state="active">';
+                        } else {
+                            html += '<div class="trilibDetail" data-value=' + j + '>';
+                        }
+
+                        html += '<b>Adresse</b>: ' + out[i][j].localisationfo_street + '<br>';
+                        html += '<b>Modèle</b>: ' + out[i][j].wastecontainermodelfo_model + '<br>';
+                        html += '<b>Type de déchet</b>: ' + trilibLabel(out[i][j].wastetype_designation) + '<br>';
+                        html += '<b>Date</b>: ' + out[i][j].fillingratedate.substr(0, 10) + '<br>';
+                        html += '<b>Taux de remplissage</b>: ' + Math.round(out[i][j].fillingrate * out[i][j].fillinglimit / 100) + ' %<br>';
+                        html += '<b>Taux de remplissage journalier (moy.)</b>: ' + Math.round(out[i][j].avgfillingrateperday * out[i][j].fillinglimit / 100) + ' %<br>';
+                        html += '</div>';
+                    }
+
+                    html += '</div><br><div class="trilibDetailNav"><a class="prev"><i class="fas fa-chevron-left"></i></a><span class="tilibNavPos">1</span>/' + out[i].length + '<a class="next"><i class="fas fa-chevron-right"></i></a></div>';
+
+                    marker.bindPopup(html);
+
+                    marker.on('popupopen', function () {
+                        $(".trilibDetailNav .prev").click(function () {
+                            var active = $(".trilibDetail[data-state='active']").data('value') + 1;
+                            var prev = active - 1;
+                            if ($(".trilibDetail:nth-of-type(" + prev + ")").length) {
+                                $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
+                                $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
+                                $(".trilibDetail:nth-of-type(" + prev + ")").css('display', 'block');
+                                $(".trilibDetail:nth-of-type(" + prev + ")").attr('data-state', 'active');
+                                $(".tilibNavPos").html(prev);
+                            }
+                        });
+
+                        $(".trilibDetailNav .next").click(function () {
+                            var active = $(".trilibDetail[data-state='active']").data('value') + 1;
+                            var next = active + 1;
+                            if ($(".trilibDetail:nth-of-type(" + next + ")").length) {
+                                $(".trilibDetail:nth-of-type(" + active + ")").attr('data-state', null);
+                                $(".trilibDetail:nth-of-type(" + active + ")").css('display', 'none');
+                                $(".trilibDetail:nth-of-type(" + next + ")").css('display', 'block');
+                                $(".trilibDetail:nth-of-type(" + next + ")").attr('data-state', 'active');
+                                $(".tilibNavPos").html(next);
+                            }
+                        });
+                    });
+
+                    markers.addLayer(marker);
+                }
+            }
+        });
+    }
 });
