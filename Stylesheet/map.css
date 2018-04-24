@@ -30,29 +30,22 @@
            opacity: 1;
 }
 
-
-#map_arr_select_container,
-#map_iris_select_container,
-#map_detail_select_container {
+.map-select-container {
     position: absolute;
     margin: 0.5em;
     z-index: 1;
     opacity: 0.5;
     transition: opacity 0.2s ease;
 }
-
-#map_arr_select_container:hover,
-#map_iris_select_container:hover,
-#map_detail_select_container:hover{
+.map-select-container:hover {
        opacity: 1;
 }
-
-#map_arr_select_container > svg,
-#map_iris_select_container > svg,
-#map_detail_select_container > svg{
+.map-select-container > svg {
     width:1em;
 }
-
+.map-select-container select {
+    max-width:50%;
+}
 .leaflet-div-icon {
     border: none;
     background: none;
