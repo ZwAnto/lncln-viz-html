@@ -1,9 +1,8 @@
 
 #main-pane{
     position:absolute;
-}
-
-#main-pane{
+    overflow-x:hidden;
+    overflow-y:scroll;
     padding-left: calc(3em + 15px);
     height:100%;
 }
